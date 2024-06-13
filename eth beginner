@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract MyToken {
+    string public name = "AdiToken";
+    string public symbol = "ADI";
+    uint public totalSupply = 0;
+
+    mapping(address => uint) public balances;
+
+    function mint(address wallet, uint amount) public {
+        totalSupply += amount;
+        balances[wallet] += amount;
+    }
+
+    function burn(address wallet, uint amount) public {
+        require(balances[wallet] >= amount, "Insufficient balance to burn");
+        totalSupply -= amount;
+        balances[wallet] -= amount;
+    }
+}
